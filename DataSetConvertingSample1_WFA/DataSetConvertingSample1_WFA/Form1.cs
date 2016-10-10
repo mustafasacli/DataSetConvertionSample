@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Net.FreeORM.DataSetConversion.Extensions;
+using Net.FreeORM.DataSetConversion.Conversion;
 
 namespace DataSetConvertingSample1_WFA
 {
@@ -15,6 +12,25 @@ namespace DataSetConvertingSample1_WFA
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<Person> personList = new List<Person>();
+            personList.Add(new Person
+            {
+                Id = 12,
+                Name = "Halid",
+                SurName = "Güneri",
+                DepartmentId = null,
+                BirthDate = new DateTime(1985, 12, 1),
+                Age = 31
+            });
+
+            DataSet ds = personList.GenerateDataSetFromDsObject();
+            dataGridView1.DataSource = ds.Tables[0];
+            dataGridView1.Refresh();
+
         }
     }
 }
