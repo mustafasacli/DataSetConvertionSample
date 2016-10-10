@@ -2,7 +2,6 @@
 using Net.FreeORM.DataSetConversion.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Reflection;
 
@@ -43,7 +42,7 @@ namespace Net.FreeORM.DataSetConversion.Conversion
 
         #endregion [ DataTable To DsObject Converting ]
 
-        #region [ DsObject To DataTable/DataSet Converting ]
+        #region [ DsObject To DataTable-DataSet Converting ]
 
         public static DataSet GenerateDataSetFromDsObject<T>(this List<T> listOfT) where T : IDsObject
         {
@@ -101,6 +100,6 @@ namespace Net.FreeORM.DataSetConversion.Conversion
             }
         }
 
-        #endregion [ DsObject To DataTable/DataSet Converting ]
+        #endregion [ DsObject To DataTable-DataSet Converting ]
     }
 }
