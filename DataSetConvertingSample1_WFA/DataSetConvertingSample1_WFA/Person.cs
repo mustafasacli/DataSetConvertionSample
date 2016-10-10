@@ -1,8 +1,11 @@
-﻿using Net.FreeORM.DataSetConversion.Interfaces;
+﻿using Net.FreeORM.DataSetConversion.Attributes;
+using Net.FreeORM.DataSetConversion.Interfaces;
 using System;
+using System.Data;
 
 namespace DataSetConvertingSample1_WFA
 {
+    [DsTable(TableName = "PersonTable")]
     public class Person : IDsObject
     {
         public long Id { get; set; }
@@ -20,6 +23,7 @@ namespace DataSetConvertingSample1_WFA
         public string GetTableName()
         {
             return "Tbl_Person";
+            //throw new NotImplementedException("Table Name Not Implemented.");
         }
     }
 }

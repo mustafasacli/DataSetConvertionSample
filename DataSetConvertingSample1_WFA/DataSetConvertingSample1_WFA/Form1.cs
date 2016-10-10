@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Net.FreeORM.DataSetConversion.Conversion;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-using Net.FreeORM.DataSetConversion.Extensions;
-using Net.FreeORM.DataSetConversion.Conversion;
 
 namespace DataSetConvertingSample1_WFA
 {
@@ -22,7 +21,7 @@ namespace DataSetConvertingSample1_WFA
                 Id = 12,
                 Name = "Halid",
                 SurName = "Güneri",
-                DepartmentId = null,
+                DepartmentId = null,//21
                 BirthDate = new DateTime(1985, 12, 1),
                 Age = 31
             });
@@ -30,7 +29,7 @@ namespace DataSetConvertingSample1_WFA
             DataSet ds = personList.GenerateDataSetFromDsObject();
             dataGridView1.DataSource = ds.Tables[0];
             dataGridView1.Refresh();
-
+            lblTableName.Text = string.Format("Table Name: {0}", ds.Tables[0].TableName);
         }
     }
 }

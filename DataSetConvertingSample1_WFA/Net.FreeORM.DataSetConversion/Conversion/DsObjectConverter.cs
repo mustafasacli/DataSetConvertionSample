@@ -1,8 +1,10 @@
-﻿using Net.FreeORM.DataSetConversion.Extensions;
+﻿using Net.FreeORM.DataSetConversion.Attributes;
+using Net.FreeORM.DataSetConversion.Extensions;
 using Net.FreeORM.DataSetConversion.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Reflection;
 
 namespace Net.FreeORM.DataSetConversion.Conversion
@@ -59,9 +61,34 @@ namespace Net.FreeORM.DataSetConversion.Conversion
             DataTable dt = new DataTable();
 
             dt = ListExtensions.ToDataTable(listOfT);
+            string tableName = string.Empty;
 
-            T pT = Activator.CreateInstance<T>();
-            dt.TableName = pT.GetTableName();
+            #region [ Get Table Name ]
+
+            try
+            {
+                T pT = Activator.CreateInstance<T>();
+                tableName = pT.GetTableName();
+            }
+            catch
+            {
+                try
+                {
+                    var attr = (DsTableAttribute)typeof(T).GetCustomAttributes(typeof(DsTableAttribute), false).First();
+                    tableName = attr.TableName ?? string.Empty;
+                }
+                catch { }
+            }
+
+            if (string.IsNullOrWhiteSpace(tableName))
+                tableName = typeof(T).Name;
+
+            #endregion
+
+            dt.TableName = tableName;
+
+            #region [ Garbage ]
+
             // Generate DataTable
             /*
             Type typT = typeof(T);
@@ -81,6 +108,9 @@ namespace Net.FreeORM.DataSetConversion.Conversion
                 dt.Rows.Add(dr);
             }
             */
+
+            #endregion
+
             return dt;
         }
 
