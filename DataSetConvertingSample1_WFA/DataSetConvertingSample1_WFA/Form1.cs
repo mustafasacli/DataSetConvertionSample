@@ -30,6 +30,7 @@ namespace DataSetConvertingSample1_WFA
             dataGridView1.DataSource = ds.Tables[0];
             dataGridView1.Refresh();
             lblTableName.Text = string.Format("Table Name: {0}", ds.Tables[0].TableName);
+            personList[0].GetSearchParameters();
         }
     }
 }
