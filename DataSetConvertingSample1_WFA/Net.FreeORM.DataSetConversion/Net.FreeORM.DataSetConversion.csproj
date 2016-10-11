@@ -48,6 +48,7 @@
     <Compile Include="Extensions\NumericExtesions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Interfaces\IDsMsSearchObject.cs" />
     <Compile Include="Interfaces\IDsObject.cs" />
     <Compile Include="Interfaces\IDsSearchObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
