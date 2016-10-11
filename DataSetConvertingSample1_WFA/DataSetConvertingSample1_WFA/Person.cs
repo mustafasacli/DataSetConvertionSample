@@ -5,7 +5,7 @@ using System;
 namespace DataSetConvertingSample1_WFA
 {
     [DsTable(TableName = "")]//PersonTable
-    public class Person : IDsObject
+    public class Person : IDsObject, IDsSearchObject
     {
         public long Id { get; set; }
 
@@ -23,6 +23,19 @@ namespace DataSetConvertingSample1_WFA
         {
             return "";//"Tbl_Person";
             //throw new NotImplementedException("Table Name Not Implemented.");
+        }
+
+        public object[] GetSearchParameters()
+        {
+            return new object[]
+            {
+                Id,
+                Name,
+                SurName,
+                DepartmentId,
+                Age,
+                BirthDate
+            };
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -260,5 +261,105 @@ namespace Net.FreeORM.DataSetConversion.Extensions
         }
 
         #endregion [ Export As Excel With Exclude Columns ]
+
+        #region [ Implode - List ]
+
+        public static string Implode<T>(this IList<T> lst, string str = ",") where T : new()
+        {
+            string result = string.Empty;
+
+            if (lst == null)
+                return result;
+
+            if (lst.Count == 0)
+                return result;
+
+            if (lst.Count == 1)
+                return string.Format("{0}", lst[0]);
+
+            string s = str ?? string.Empty;
+
+
+            for (int counter = 0; counter < lst.Count - 1; counter++)
+            {
+                result = string.Format("{0}{1}{2}", result, lst[counter], s);
+            }
+
+            result = string.Format("{0}{1}", result, lst[lst.Count - 1]);
+
+            return result;
+        }
+
+        #endregion
+
+        #region [ Implode - Array ]
+
+        public static string Implode<T>(this T[] lst, string str) where T : new()
+        {
+            string result = string.Empty;
+
+            if (lst == null)
+                return result;
+
+            if (lst.Length == 0)
+                return result;
+
+            if (lst.Length == 1)
+            {
+                result = string.Format("{0}", lst[0]);
+                return result;
+            }
+
+            string s = str ?? string.Empty;
+
+            for (int counter = 0; counter < lst.Length - 1; counter++)
+            {
+                result = string.Format("{0}{1}{2}", result, lst[counter], s);
+            }
+
+            result = string.Format("{0}{1}", result, lst[lst.Length - 1]);
+
+            return result;
+        }
+
+        #endregion
+
+        #region [ IsNullOrEmpty ]
+
+        public static bool IsNullOrEmpty<T>(this IList<T> lst) where T : new()
+        {
+            bool result = true;
+
+            if (lst == null)
+                return result;
+
+            result = lst.Count < 1;
+            return result;
+        }
+
+        public static bool IsNullOrEmpty<T>(this T[] lst) where T : new()
+        {
+            bool result = true;
+
+            if (lst == null)
+                return result;
+
+            result = lst.Length < 1;
+            return result;
+        }
+        
+        public static bool IsNullOrEmpty(this ArrayList arr)
+        {
+            bool result = true;
+
+            if (arr == null)
+                return result;
+
+            result = arr.Count < 1;
+            return result;
+        }
+
+        #endregion
+
     }
 }

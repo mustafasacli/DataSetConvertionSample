@@ -1,5 +1,7 @@
-﻿using System;
-using System.Text;
+﻿using Net.FreeORM.DataSetConversion.Constant;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Net.FreeORM.DataSetConversion.Extensions
 {
@@ -116,5 +118,38 @@ namespace Net.FreeORM.DataSetConversion.Extensions
             }
         } // end isNumber
 
+        public static decimal HexToDecimal(this string strHex)
+        {
+            if (string.IsNullOrWhiteSpace(strHex))
+            {
+                throw new ArgumentException("Input string can not be null, empty or white-space string.");
+            }
+
+            char[] hexx = AppConstants.HexNumCharList.ToCharArray();
+
+            char[] ToHexArr = strHex.Reverse().ToArray(); //strHex.ToCharArray();
+            int count = ToHexArr.AsQueryable().Where(c => hexx.Contains(c) == false).Count();
+
+            if (count > 0)
+            {
+                throw new ArgumentException("Illegal characters are given. Characters: \"0123456789ABCDEF\".");
+            }
+
+            List<char> lstChars = hexx.ToList();
+            decimal dd = decimal.Zero;
+            int indx;
+            for (int counter = 0; counter < ToHexArr.Length; counter++)
+            {
+                indx = lstChars.IndexOf(ToHexArr[ToHexArr.Length - counter - 1]);
+                if (indx < 0)
+                {
+                    throw new ArgumentException("Illegal characters are given. Characters: \"0123456789ABCDEF\".");
+                }
+
+                dd += (decimal)(indx * Math.Pow(16, ToHexArr.Length - counter - 1));
+            }
+
+            return dd;
+        }
     }
 }

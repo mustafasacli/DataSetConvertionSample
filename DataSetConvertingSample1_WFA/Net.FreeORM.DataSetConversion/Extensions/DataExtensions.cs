@@ -415,5 +415,28 @@ namespace Net.FreeORM.DataSetConversion.Extensions
         }
 
         #endregion [ GetSomeColumnsAsTable method ]
+
+        public static bool IsNulOrEmpty<T>(this T t) where T : DataTable
+        {
+            if (t == null)
+                return true;
+
+            if (t.Rows.Count < 1)
+                return true;
+
+            return false;
+        }
+
+        public static bool HasRecord<T>(this T t) where T : DataTable
+        {
+            if (t == null)
+                return false;
+
+            if (t.Rows.Count < 1)
+                return false;
+
+            return true;
+        }
+
     }
 }
