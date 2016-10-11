@@ -41,12 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\DsTableAttribute.cs" />
+    <Compile Include="Constant\AppConstants.cs" />
     <Compile Include="Conversion\DsObjectConverter.cs" />
     <Compile Include="Extensions\DataExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="Extensions\NumericExtesions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Interfaces\IDsObject.cs" />
+    <Compile Include="Interfaces\IDsSearchObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
