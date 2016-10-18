@@ -70,7 +70,9 @@ namespace Net.FreeORM.DataSetConversion.Conversion
                 T pT = Activator.CreateInstance<T>();
                 tableName = pT.GetTableName();
             }
-            catch
+            catch { }
+
+            if (string.IsNullOrWhiteSpace(tableName))
             {
                 try
                 {
@@ -86,30 +88,6 @@ namespace Net.FreeORM.DataSetConversion.Conversion
             #endregion
 
             dt.TableName = tableName;
-
-            #region [ Garbage ]
-
-            // Generate DataTable
-            /*
-            Type typT = typeof(T);
-            PropertyInfo[] propInfoList = typT.GetProperties();
-            foreach (PropertyInfo prp in propInfoList)
-            {
-                if (Nullable.GetUnderlyingType(prp.PropertyType) == null)
-                    dt.Columns.Add(prp.Name, prp.PropertyType);
-            }
-
-            DataRow dr;
-            foreach (var item in listOfT)
-            {
-                dr = null;
-                dr = dt.NewRow();
-                item.GenerateRow(ref dr);
-                dt.Rows.Add(dr);
-            }
-            */
-
-            #endregion
 
             return dt;
         }

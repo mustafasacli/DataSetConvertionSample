@@ -4,7 +4,7 @@ using System;
 
 namespace DataSetConvertingSample1_WFA
 {
-    [DsTable(TableName = "")]//PersonTable
+    [DsTable(TableName = "PersonTable")]//PersonTable
     public class Person : IDsObject, IDsSearchObject
     {
         public long Id { get; set; }
