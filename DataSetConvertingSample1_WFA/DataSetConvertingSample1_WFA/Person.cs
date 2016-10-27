@@ -1,4 +1,5 @@
 ﻿using Net.FreeORM.DataSetConversion.Attributes;
+using Net.FreeORM.DataSetConversion.Extensions;
 using Net.FreeORM.DataSetConversion.Interfaces;
 using System;
 
@@ -36,6 +37,16 @@ namespace DataSetConvertingSample1_WFA
                 Age,
                 BirthDate
             };
+        }
+
+        public object Clone()
+        {
+            return (Person)this.MemberwiseClone();
+        }
+
+        public Person ObjClone()
+        {
+            return Clone().AsType<Person>();
         }
     }
 }

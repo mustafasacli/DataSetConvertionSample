@@ -44,6 +44,7 @@
     <Compile Include="Constant\AppConstants.cs" />
     <Compile Include="Conversion\DsObjectConverter.cs" />
     <Compile Include="Extensions\DataExtensions.cs" />
+    <Compile Include="Extensions\GenericExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\NumericExtesions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />

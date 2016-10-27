@@ -1,6 +1,8 @@
-﻿namespace Net.FreeORM.DataSetConversion.Interfaces
+﻿using System;
+
+namespace Net.FreeORM.DataSetConversion.Interfaces
 {
-    public interface IDsObject
+    public interface IDsObject : ICloneable
     {
         string GetTableName();
     }
