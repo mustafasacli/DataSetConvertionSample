@@ -20,7 +20,7 @@ namespace Net.FreeORM.DataSetConversion.Extensions
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public static DataTable ToDataTable<T>(IList<T> data)
+        public static DataTable ToDataTable<T>(this IList<T> data)
         {
             try
             {
@@ -47,6 +47,46 @@ namespace Net.FreeORM.DataSetConversion.Extensions
             {
                 throw exc;
             }
+        }
+
+        public static DataTable ToDataTableV2<T>(this IList<T> data)
+        {
+            DataTable table = new DataTable();
+
+            try
+            {
+                PropertyInfo[] propsArr = typeof(T).GetProperties();
+
+                if (propsArr == null || propsArr.Length == 0)
+                    return table;
+
+                foreach (PropertyInfo prpInf in propsArr)
+                {
+                    if (prpInf.CanRead)
+                    {
+                        table.Columns.Add(prpInf.Name,
+                            Nullable.GetUnderlyingType(prpInf.PropertyType) ?? prpInf.PropertyType);
+                    }
+                }
+
+                DataRow row;
+
+                foreach (T item in data)
+                {
+                    row = table.NewRow();
+
+                    foreach (PropertyInfo prpInf in propsArr)
+                        row[prpInf.Name] = prpInf.GetValue(item) ?? DBNull.Value;
+
+                    table.Rows.Add(row);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return table;
         }
 
         #endregion [ List To DataTable ]
@@ -279,7 +319,6 @@ namespace Net.FreeORM.DataSetConversion.Extensions
 
             string s = str ?? string.Empty;
 
-
             for (int counter = 0; counter < lst.Count - 1; counter++)
             {
                 result = string.Format("{0}{1}{2}", result, lst[counter], s);
@@ -290,7 +329,7 @@ namespace Net.FreeORM.DataSetConversion.Extensions
             return result;
         }
 
-        #endregion
+        #endregion [ Implode - List ]
 
         #region [ Implode - Array ]
 
@@ -322,7 +361,7 @@ namespace Net.FreeORM.DataSetConversion.Extensions
             return result;
         }
 
-        #endregion
+        #endregion [ Implode - Array ]
 
         #region [ IsNullOrEmpty ]
 
@@ -347,7 +386,7 @@ namespace Net.FreeORM.DataSetConversion.Extensions
             result = lst.Length < 1;
             return result;
         }
-        
+
         public static bool IsNullOrEmpty(this ArrayList arr)
         {
             bool result = true;
@@ -359,7 +398,6 @@ namespace Net.FreeORM.DataSetConversion.Extensions
             return result;
         }
 
-        #endregion
-
+        #endregion [ IsNullOrEmpty ]
     }
 }

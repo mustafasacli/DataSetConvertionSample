@@ -17,8 +17,11 @@ namespace Net.FreeORM.DataSetConversion.Extensions
                 object val = null;
                 foreach (PropertyInfo prpInf in propsArr)
                 {
-                    val = prpInf.GetValue(_t);
-                    prpInf.SetValue(rT, val);
+                    if (prpInf.CanRead && prpInf.CanWrite)
+                    {
+                        val = prpInf.GetValue(_t);
+                        prpInf.SetValue(rT, val);
+                    }
                 }
             }
 

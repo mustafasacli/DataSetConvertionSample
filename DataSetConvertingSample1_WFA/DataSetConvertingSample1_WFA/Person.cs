@@ -19,7 +19,7 @@ namespace DataSetConvertingSample1_WFA
         public int Age { get; set; }
 
         public DateTime BirthDate { get; set; }
-
+        
         public string GetTableName()
         {
             return "";//"Tbl_Person";

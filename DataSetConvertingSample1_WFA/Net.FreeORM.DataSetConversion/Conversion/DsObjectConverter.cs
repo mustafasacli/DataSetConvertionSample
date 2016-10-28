@@ -60,7 +60,8 @@ namespace Net.FreeORM.DataSetConversion.Conversion
         {
             DataTable dt = new DataTable();
 
-            dt = ListExtensions.ToDataTable(listOfT);
+            dt = listOfT.ToDataTableV2();
+            //dt = ListExtensions.ToDataTable(listOfT);
             string tableName = string.Empty;
 
             #region [ Get Table Name ]
