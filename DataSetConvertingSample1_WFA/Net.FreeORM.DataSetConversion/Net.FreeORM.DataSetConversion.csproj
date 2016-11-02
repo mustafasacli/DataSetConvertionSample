@@ -43,6 +43,8 @@
     <Compile Include="Attributes\DsTableAttribute.cs" />
     <Compile Include="Constant\AppConstants.cs" />
     <Compile Include="Conversion\DsObjectConverter.cs" />
+    <Compile Include="Difference\DsDifference.cs" />
+    <Compile Include="Difference\DsDifferenceParam.cs" />
     <Compile Include="Extensions\DataExtensions.cs" />
     <Compile Include="Extensions\GenericExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />

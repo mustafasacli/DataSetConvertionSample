@@ -77,7 +77,7 @@ namespace Net.FreeORM.DataSetConversion.Extensions
             try
             {
                 if (dt == null)
-                    throw new System.NullReferenceException("DataTable object can not be null.");
+                    throw new NullReferenceException("DataTable object can not be null.");
 
                 if (pageNumber < 0)
                     throw new Exception("Page Number cannot be less than 0.");
